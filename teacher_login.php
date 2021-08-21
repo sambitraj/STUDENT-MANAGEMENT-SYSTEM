@@ -30,7 +30,6 @@
         }
         body{
             background-color: #dfe6e9;
-            
         }
         #btn{
             background-color: #dfe6e9;
@@ -50,7 +49,7 @@
     <center><br><br>
         <div id="login">
             <div id="heading">
-                <h3>STUDENT LOGIN </h3><br><br><br>
+                <h3>TEACHER LOGIN </h3><br><br><br>
             </div>  
             <form action=""method="post">
                 <input type="text" name="email" placeholder="E-mail" id="btn" required><br><br>
@@ -63,14 +62,14 @@
                 if(isset($_POST['submit'])){
                     $connection = mysqli_connect("localhost","root","");
                     $db = mysqli_select_db($connection,"aca");
-                    $query = "select * from students where email = '$_POST[email]'";
+                    $query = "select * from teachers where email = '$_POST[email]'";
                     $query_run = mysqli_query($connection,$query);
                     while($row = mysqli_fetch_assoc($query_run)){
                         if($row['email'] == $_POST['email']){
                             if($row['password'] == $_POST['password']){
-                                $_SESSION['name'] =  $row['name'];
+                                $_SESSION['name'] =  $row['teacher_name'];
                                 $_SESSION['email'] =  $row['email'];
-                                header("Location: student_dashboard.php");
+                                header("Location: teacher_dashboard.php");
                             }
                             else{
                                 echo"fail password";
